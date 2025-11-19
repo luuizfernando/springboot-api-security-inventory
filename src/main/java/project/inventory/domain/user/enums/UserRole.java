@@ -1,4 +1,4 @@
-package project.inventory.domain.user;
+package project.inventory.domain.user.enums;
 
 public enum UserRole {
 
