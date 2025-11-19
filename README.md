@@ -109,6 +109,6 @@ curl http://localhost:8080/products -H "Authorization: Bearer <jwt-token>"
 
 ## Autores
 
-- **Equipe Inventory**
+- [**Luiz Fernando**](https://www.linkedin.com/in/luizfernando-react-java-fullstack/)
 
 Obrigado por visitar e bons códigos!
