@@ -42,4 +42,20 @@ public class Order implements Serializable {
 
     private Instant createdAt;
     private Instant updatedAt;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setClient(User client) {
+        this.client = client;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
 }

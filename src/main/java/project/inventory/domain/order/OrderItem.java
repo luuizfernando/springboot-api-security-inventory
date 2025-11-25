@@ -18,4 +18,12 @@ public class OrderItem {
     private OrderItemPK id = new OrderItemPK();
 
     private Integer quantity;
+
+    public OrderItemPK getId() {
+        return id;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 }

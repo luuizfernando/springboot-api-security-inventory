@@ -41,4 +41,8 @@ public class Product {
     @JsonIgnore
     private Set<OrderItem> items = new HashSet<>();
 
+    public Long getId() {
+        return id;
+    }
+
 }
