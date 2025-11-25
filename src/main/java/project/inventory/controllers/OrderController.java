@@ -1,5 +1,6 @@
 package project.inventory.controllers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import project.inventory.domain.order.Order;
 import project.inventory.domain.order.dto.CreateOrderDTO;
+import project.inventory.domain.order.enums.OrderStatus;
 import project.inventory.services.OrderService;
 
 @RestController
@@ -25,7 +28,11 @@ public class OrderController {
     private OrderService service;
 
     @GetMapping
-    public ResponseEntity<List<Order>> findAll() {
+    public ResponseEntity<List<Order>> findAll(
+            @RequestParam(required = false) OrderStatus status,
+            @RequestParam(required = false) LocalDateTime start,
+            @RequestParam(required = false) LocalDateTime end
+    ) {
         List<Order> orders = service.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(orders);
     }

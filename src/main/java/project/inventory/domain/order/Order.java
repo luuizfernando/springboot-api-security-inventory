@@ -1,6 +1,7 @@
 package project.inventory.domain.order;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,4 +40,6 @@ public class Order implements Serializable {
     private Set<OrderItem> items = new HashSet<>();
     private OrderStatus status;
 
+    private Instant createdAt;
+    private Instant updatedAt;
 }
