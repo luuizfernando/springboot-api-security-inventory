@@ -29,4 +29,8 @@ public class ProductService {
         return prod.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
+    public void deleteProduct(Product prod) {
+        repository.delete(prod);
+    }
+
 }

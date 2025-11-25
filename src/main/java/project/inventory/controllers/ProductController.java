@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import project.inventory.domain.product.Product;
 import project.inventory.services.ProductService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +41,16 @@ public class ProductController {
     public ResponseEntity<Product> insertProduct(@RequestBody Product prod) {
         prod = service.insertProduct(prod);
         return ResponseEntity.status(HttpStatus.CREATED).body(prod);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        Product product = service.getProductById(id);
+        if (product == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        service.deleteProduct(product);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
 }

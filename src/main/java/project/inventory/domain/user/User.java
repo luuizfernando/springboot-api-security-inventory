@@ -29,8 +29,11 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username;
+
     private String password;
+
     private UserRole role;
     
     public User(String username, String password, UserRole role) {
