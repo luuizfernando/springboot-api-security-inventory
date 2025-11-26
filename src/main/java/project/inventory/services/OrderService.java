@@ -3,6 +3,8 @@ package project.inventory.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import io.github.resilience4j.retry.annotation.Retry;
@@ -32,10 +34,12 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    @Cacheable(value = "orders", key = "#id")
     public Order findById(Long id) {
         return orderRepository.findById(id).orElse(null);
     }
 
+    @CacheEvict(value = {"orders", "ordersList"}, allEntries = true)
     @Retry(name = "orderService")
     @Transactional
     public Order create(CreateOrderDTO order) {
