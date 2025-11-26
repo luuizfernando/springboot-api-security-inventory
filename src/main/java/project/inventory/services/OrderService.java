@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.transaction.Transactional;
 import project.inventory.domain.order.Order;
 import project.inventory.domain.order.OrderItem;
@@ -35,6 +36,7 @@ public class OrderService {
         return orderRepository.findById(id).orElse(null);
     }
 
+    @Retry(name = "orderService")
     @Transactional
     public Order create(CreateOrderDTO order) {
         var user = userRepository.findById(order.clientId()).orElse(null);
