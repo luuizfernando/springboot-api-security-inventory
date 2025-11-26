@@ -12,6 +12,12 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
+  redis:
+    image: redis:latest
+    container_name: inventory-redis
+    volumes:
+      - redis_data:/data
+
   app:
     build:
       context: .
@@ -26,9 +32,13 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_SQL_INIT_MODE=always
       - JWT_SECRET=my-secret-key
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
     depends_on:
       - mysql
+      - redis
     restart: unless-stopped
 
 volumes:
   db_data:
+  redis_data:
